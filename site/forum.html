@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Discussion Board</title>
+  <style>
+    .discussion-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+    
+    .username {
+      font-weight: bold;
+    }
+    
+    .timestamp {
+      color: #888;
+      font-size: 12px;
+    }
+    
+    #new-discussion-form {
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    function postDiscussion() {
+      var username = document.getElementById('username').value;
+      var topic = document.getElementById('topic').value;
+      var message = document.getElementById('message').value;
+      var timestamp = new Date().toLocaleString();
+      
+      var discussionItem = document.createElement('div');
+      discussionItem.className = 'discussion-item';
+      
+      var usernameElement = document.createElement('span');
+      usernameElement.className = 'username';
+      usernameElement.innerHTML = username;
+      
+      var timestampElement = document.createElement('span');
+      timestampElement.className = 'timestamp';
+      timestampElement.innerHTML = timestamp;
+      
+      var topicElement = document.createElement('h3');
+      topicElement.innerHTML = topic;
+      
+      var messageElement = document.createElement('p');
+      messageElement.innerHTML = message;
+      
+      discussionItem.appendChild(usernameElement);
+      discussionItem.appendChild(document.createElement('br'));
+      discussionItem.appendChild(timestampElement);
+      discussionItem.appendChild(document.createElement('br'));
+      discussionItem.appendChild(topicElement);
+      discussionItem.appendChild(messageElement);
+      
+      var discussionBoard = document.getElementById('discussion-board');
+      discussionBoard.appendChild(discussionItem);
+      
+      // Clear the form fields
+      document.getElementById('username').value = '';
+      document.getElementById('topic').value = '';
+      document.getElementById('message').value = '';
+      
+      return false; // Prevent form submission
+    }
+  </script>
+</head>
+<body>
+  <h1>Welcome to the Discussion Board</h1>
+  
+  <div id="discussion-board">
+    <!-- Existing discussions will be displayed here -->
+  </div>
+  
+  <h2>Post a New Discussion</h2>
+  <form id="new-discussion-form" onsubmit="return postDiscussion()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+    <label for="topic">Topic:</label>
+    <input type="text" id="topic" name="topic" required><br>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="4" required></textarea><br>
+    <button type="submit">Post</button>
+  </form>
+</body>
+</html>
